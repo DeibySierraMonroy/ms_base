@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infrastructure/entry-points/api-rest/ms_rec_register.api-rest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/infrastructure/entry-points/api-rest/ms_rec_register.api-rest.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/applications/app-service/ms_rec_register.app-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/applications/app-service/ms_rec_register.app-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/applications/app-service/ms_rec_register.app-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/applications/app-service/ms_rec_register.app-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/jpa-repository/ms_rec_register.jpa-repository.main.iml" filepath="$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/jpa-repository/ms_rec_register.jpa-repository.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/jpa-repository/ms_rec_register.jpa-repository.test.iml" filepath="$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/jpa-repository/ms_rec_register.jpa-repository.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/model/ms_rec_register.model.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/model/ms_rec_register.model.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/rabbitmq-publisher/ms_rec_register.rabbitmq-publisher.main.iml" filepath="$PROJECT_DIR$/.idea/modules/infrastructure/driven-adapters/rabbitmq-publisher/ms_rec_register.rabbitmq-publisher.main.iml" />
+    </modules>
+  </component>
+</project>

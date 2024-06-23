@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdapterOperations.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jpa-repository</a> &gt; <a href="index.source.html" class="el_package">co.com.activos.jpa.helper</a> &gt; <span class="el_source">AdapterOperations.java</span></div><h1>AdapterOperations.java</h1><pre class="source lang-java linenums">package co.com.activos.jpa.helper;
+
+import org.reactivecommons.utils.ObjectMapper;
+import org.springframework.data.domain.Example;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+import java.util.function.Function;
+
+import static java.util.stream.StreamSupport.stream;
+
+public abstract class AdapterOperations&lt;E, D, I, R extends CrudRepository&lt;D, I&gt; &amp; QueryByExampleExecutor&lt;D&gt;&gt; {
+    protected R repository;
+    private Class&lt;D&gt; dataClass;
+    protected ObjectMapper mapper;
+    private Function&lt;D, E&gt; toEntityFn;
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+<span class="nc" id="L21">    protected AdapterOperations(R repository, ObjectMapper mapper, Function&lt;D, E&gt; toEntityFn) {</span>
+<span class="nc" id="L22">        this.repository = repository;</span>
+<span class="nc" id="L23">        this.mapper = mapper;</span>
+<span class="nc" id="L24">        ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();</span>
+<span class="nc" id="L25">        this.dataClass = (Class&lt;D&gt;) genericSuperclass.getActualTypeArguments()[1];</span>
+<span class="nc" id="L26">        this.toEntityFn = toEntityFn;</span>
+<span class="nc" id="L27">    }</span>
+
+    protected D toData(E entity) {
+<span class="nc" id="L30">        return mapper.map(entity, dataClass);</span>
+    }
+
+    protected E toEntity(D data) {
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        return data != null ? toEntityFn.apply(data) : null;</span>
+    }
+
+    public E save(E entity) {
+<span class="nc" id="L38">        D data = toData(entity);</span>
+<span class="nc" id="L39">        return toEntity(saveData(data));</span>
+    }
+
+    protected List&lt;E&gt; saveAllEntities(List&lt;E&gt; entities) {
+<span class="nc" id="L43">        List&lt;D&gt; list = entities.stream().map(this::toData).toList();</span>
+<span class="nc" id="L44">        return toList(saveData(list));</span>
+    }
+
+    public List&lt;E&gt; toList(Iterable&lt;D&gt; iterable) {
+<span class="nc" id="L48">        return stream(iterable.spliterator(), false).map(this::toEntity).toList();</span>
+    }
+
+    protected D saveData(D data) {
+<span class="nc" id="L52">        return repository.save(data);</span>
+    }
+
+    protected Iterable&lt;D&gt; saveData(List&lt;D&gt; data) {
+<span class="nc" id="L56">        return repository.saveAll(data);</span>
+    }
+
+    public E findById(I id) {
+<span class="nc" id="L60">        return toEntity(repository.findById(id).orElse(null));</span>
+    }
+
+    public List&lt;E&gt; findByExample(E entity) {
+<span class="nc" id="L64">        return toList(repository.findAll( Example.of(toData(entity))));</span>
+    }
+
+
+    public List&lt;E&gt; findAll(){
+<span class="nc" id="L69">        return toList(repository.findAll());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

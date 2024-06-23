@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="co.com.activos.jpa.config.JpaConfigTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-21T11:31:20" hostname="activos-Vivobook-ASUSLaptop-X1704VA-X1704VA" time="1.345">
+  <properties/>
+  <testcase name="datasourceTest()" classname="co.com.activos.jpa.config.JpaConfigTest" time="1.345"/>
+  <system-out><![CDATA[06:31:21.101 [Test worker] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+06:31:21.504 [Test worker] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:test user=SA
+06:31:21.507 [Test worker] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
